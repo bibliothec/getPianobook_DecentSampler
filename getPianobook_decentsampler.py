@@ -1,5 +1,6 @@
 import os
 import time
+import urllib.parse
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -62,7 +63,7 @@ for num in range(itemnum):
     time.sleep(2)
     tmpitemtag = driver.find_element(By.CLASS_NAME, "download")
     tmpitemurl = tmpitemtag.get_attribute("href")
-    tmpfilename = os.path.basename(tmpitemurl).replace('%20',' ')
+    tmpfilename = urllib.parse.unquote(os.path.basename(tmpitemurl))
     tmpfilepath = os.path.join(downloaddir, tmpfilename)
     if os.path.exists(tmpfilepath):
         print(str(tmpfilename)+" was downloaded. Skip it.")

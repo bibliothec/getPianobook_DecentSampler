@@ -13,6 +13,8 @@ options = webdriver.ChromeOptions()
 options.add_experimental_option("prefs", {
     "download.default_directory": downloaddir
 })
+options.add_argument('--headless')
+options.add_argument('--window-size=2560,1600')
 driver = webdriver.Chrome(options=options)
 # login
 loginurl = "https://www.pianobook.co.uk/members/login/?redirect_url=https://www.pianobook.co.uk/"

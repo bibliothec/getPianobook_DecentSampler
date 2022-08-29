@@ -1,12 +1,16 @@
 import os
 import time
 import urllib.parse
+import glob
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 # script to get pianobook for decent sampler
 # download items in current directory
+# remove all crdownload file
+for filename in glob.glob('*.crdownload'):
+    os.remove(filename)
 # setting
 downloaddir = os.getcwd()
 options = webdriver.ChromeOptions()
@@ -76,8 +80,12 @@ for num in range(itemnum):
     tmpitemtag.click()
     print("Download "+str(tmpfilename))
     time.sleep(3)
-    driver.close()
-time.sleep(10)
+    if(num<itemnum-1):
+            driver.close()
+# confirm complately downloaded all items
+while glob.glob("*.crdownload"):
+    time.sleep(5)
+    print("Wait downloading")
 print("Successfully download")
 driver.close()
 driver.quit()
